@@ -28,13 +28,13 @@ def create_date_features(df: pd.DataFrame, date_column='date'):
 
     return df
 
-def create_lag_features(df: pd.DataFrame, groupe_columns, target_column, lags=[1,7,14]):
+def create_lag_features(df: pd.DataFrame, group_columns, target_column, lags=[1,7,14]):
     """
     Creates lag features for a given target column, grouped by specific columns.
 
     Args:
         df (pd.DataFrame): Input dataframe containing the time series data.
-        groupe_columns (list): Columns to group by before creating lag features (e.g., ['store', 'item']).
+        group_columns (list): Columns to group by before creating lag features (e.g., ['store', 'item']).
         target_column (str): The name of the target variable to generate lags for.
         lags (list): List of integers representing the lag intervals to compute.
 
@@ -42,7 +42,7 @@ def create_lag_features(df: pd.DataFrame, groupe_columns, target_column, lags=[1
         pd.DataFrame: DataFrame with new lag features added (e.g., 'sales_lag_1', 'sales_lag_7', etc.).
     """
     for lag in lags: 
-        df[f"{target_column}_lag_{lag}"] = df.groupby(by=groupe_columns)[target_column].shift(lag)
+        df[f"{target_column}_lag_{lag}"] = df.groupby(by=group_columns)[target_column].shift(lag)
 
     return df
 
@@ -76,7 +76,6 @@ def create_all_features(df):
     Returns:
         pd.DataFrame: DataFrame with enriched features for time series modeling.
     """
-    df["date"] = pd.to_datetime(df["date"])
     df = df.sort_values(by=["store", "item", "date"])
 
     df = create_date_features(df, date_column='date')
