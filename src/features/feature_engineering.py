@@ -76,6 +76,7 @@ def create_all_features(df):
     Returns:
         pd.DataFrame: DataFrame with enriched features for time series modeling.
     """
+    df["date"] = pd.to_datetime(df["date"])
     df = df.sort_values(by=["store", "item", "date"])
 
     df = create_date_features(df, date_column='date')
