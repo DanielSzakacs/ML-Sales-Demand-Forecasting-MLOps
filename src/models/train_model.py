@@ -3,6 +3,7 @@ from sklearn.metrics import mean_absolute_error as mae
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 import os 
+import pandas as pd 
 
 import numpy as np
 import xgboost as xgb
@@ -32,10 +33,15 @@ def evaluate_model(y_true, y_pred):
 
 
 
-def train_base_model(df):
+def train_base_model(df: pd.DataFrame):
     """
+    Trains a simple baseline model using a one-step lag of the target variable as prediction.
+
     Args:
-    Returns: 
+        df (pd.DataFrame): Input dataframe containing 'date', 'store', 'item', and 'sales' columns.
+
+    Returns:
+        dict: A dictionary of evaluation metrics (e.g., MAE, MSE, RMSE) comparing the true sales vs. lagged predictions.
     """
     df = df.sort_values(by=["date", "store", "item"])
     df["prediction"] = df.groupby(["store", "item"])["sales"].shift(1)
@@ -46,8 +52,16 @@ def train_base_model(df):
 
 def train_xgboost_model(df, target="sales"):
     """
+    Trains an XGBoost regression model to predict the target variable using all available features.
+
     Args:
+        df (pd.DataFrame): Preprocessed input dataframe with feature columns and a target column (default: 'sales').
+        target (str): The name of the target column to predict.
+
     Returns:
+        Tuple[xgb.XGBRegressor, dict]: 
+            - Trained XGBoost model object.
+            - Dictionary of evaluation metrics (e.g., MAE, MSE, RMSE) on the test set.
     """
 
     # make sure there is no na
