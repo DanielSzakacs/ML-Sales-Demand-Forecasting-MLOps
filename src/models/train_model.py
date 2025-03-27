@@ -2,6 +2,7 @@ from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import mean_absolute_error as mae
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
+import os 
 
 import numpy as np
 import xgboost as xgb
@@ -67,6 +68,8 @@ def train_xgboost_model(df, target="sales"):
     y_pred = model.predict(X_test)
 
     metrics = evaluate_model(y_test, y_pred)
-    model.save_model("models/xgb_model.json")
+
+    os.makedirs("./src/models/saved/xgboost", exist_ok=True)
+    model.save_model("./src/models/saved/xgboost/xgb_model_v1.json")
 
     return model, metrics
