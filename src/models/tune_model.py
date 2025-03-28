@@ -11,7 +11,7 @@ def objective(trial, df, target="sales"):
     Returns: 
     """
     df = df.dropna()
-    features = [col for col in df.columns not in ["date", "sales", "prediction"]]
+    features = [col for col in df.columns if col not in ["date", "sales", "prediction"]]
 
     X = df[features]
     y = df[target]
