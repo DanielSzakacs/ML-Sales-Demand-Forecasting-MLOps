@@ -5,9 +5,12 @@ import mlflow
 import mlflow.xgboost
 import xgboost as xgb
 
-def train_xgboost_with_mlflow(X_train, X_test, y_train, y_test, params):
-    with mlflow.start_run():
+def train_xgboost_with_mlflow(X_train, X_test, y_train, y_test, params):    
+    mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
+    mlflow.set_experiment("Xgboost model v1")
 
+    with mlflow.start_run():
+    
         model = xgb.XGBRegressor(**params)
         model.fit(X_train, y_train)
 
