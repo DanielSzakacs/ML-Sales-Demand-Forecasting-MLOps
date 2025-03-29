@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 data/processed/clean_sales_data.csv
+
+mlruns/
+mlartifacts/
+mlflow.db
