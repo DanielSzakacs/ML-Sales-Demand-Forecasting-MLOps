@@ -11,7 +11,7 @@ with open("./src/models/saved/xgboost/xgb_optuna_best_params.json") as f :
 
 # Load the clean sorce data 
 df = pd.read_csv("./data/processed/clean_sales_data.csv", parse_dates=["date"])
-df.sort_values(by=["date", "store", "item"])
+df = df.sort_values(by=["date", "store", "item"])
 
 # Split data
 features = [col for col in df.columns if col not in ["sales", "date", "prediction"]]
