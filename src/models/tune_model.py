@@ -7,8 +7,15 @@ from sklearn.metrics import mean_squared_error
 
 def objective(trial, df, target="sales"):
     """
-    Args: 
-    Returns: 
+    Objective function for Optuna hyperparameter optimization.
+
+    Args:
+        trial (optuna.trial.Trial): A single trial object containing the current set of hyperparameters.
+        df (pd.DataFrame): The dataset containing features and the target variable.
+        target (str, optional): The name of the target column. Defaults to "sales".
+
+    Returns:
+        float: Root Mean Squared Error (RMSE) of the model on the test set.
     """
     df = df.dropna()
     features = [col for col in df.columns if col not in ["date", "sales", "prediction"]]
@@ -38,8 +45,14 @@ def objective(trial, df, target="sales"):
 
 def run_optuna_tuning(df, n_trials=30):
     """
+    Runs Optuna hyperparameter tuning for an XGBoost model.
+
     Args:
-    Returns: 
+        df (pd.DataFrame): The dataset used for training and evaluation.
+        n_trials (int, optional): Number of Optuna trials to run. Defaults to 3.
+
+    Returns:
+        optuna.study.Study: The study object containing optimization results.
     """
     study = optuna.create_study(direction="minimize")
     study.optimize(lambda trial: objective(trial, df), n_trials=n_trials)
