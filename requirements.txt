@@ -8,3 +8,5 @@ optuna
 optuna[vizualization]
 mlflow
 plotly
+fastapi 
+unicorn
