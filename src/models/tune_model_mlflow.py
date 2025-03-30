@@ -62,7 +62,6 @@ def run_optuna_tuning(df, n_trials=20):
     Returns:
         optuna.study.Study: The study object containing optimization results.
     """
-    # study = optuna.create_study(direction="minimize")
     mlflow.set_experiment("optuna_xgboost_tuning_20_trial")
     study = optuna.create_study(
     direction="minimize",
