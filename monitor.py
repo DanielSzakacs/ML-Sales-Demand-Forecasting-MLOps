@@ -37,5 +37,5 @@ THRESHOLD = 20
 print(f"[{datetime.now()}] RMSE on new data: {rmse:.2f}")
 
 if rmse > THRESHOLD:
-    print("⚠️ Drift detected! RMSE above threshold.")
+    print("Drift detected! RMSE above threshold.")
 
