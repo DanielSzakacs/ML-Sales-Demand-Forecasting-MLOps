@@ -27,8 +27,11 @@ The goal was not only to make accurate predictions but to cover key MLOps compon
 ## Dataset
 This data source contains the daily sales data of 50 items from 10 stores, covering the period from 2013 to 2018. For the dataset go to 
 <a href="https://www.kaggle.com/competitions/demand-forecasting-kernels-only/data">Kaggle</a>
-![ARIMA](reports/acf_pacf_plot.jpg)
-![correlation](reports/correlation.jpg)
+
+<p align="center">
+  <img src="reports/acf_pacf_plot.jpg" alt="ARIMA" width="900"/>
+  <img src="reports/correlation.jpg" alt="correlation" width="600"/>
+</p>
 
 
 ## Technology Stack
@@ -57,8 +60,11 @@ This data source contains the daily sales data of 50 items from 10 stores, cover
 - Selected best model using lowest RMSE
 
 Included visualizations:
-![Optimization history](reports/optuna_optimalization_history.html)
-- [Parameter importance](reports/optuna_optimalization_history.html)
+<p align="center">
+  <img src="reports/optuna.png" alt="Optimization history" width="500"/>
+  <img src="reports/optuna_2.png" alt="Parameter importance" width="500"/>
+</p>
+
 
 ## Model Tracking with MLflow
 - Tracked all training runs, metrics, and parameters
