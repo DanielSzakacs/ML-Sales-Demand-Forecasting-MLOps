@@ -30,7 +30,8 @@ This data source contains the daily sales data of 50 items from 10 stores, cover
 
 <p align="center">
   <img src="reports/acf_pacf_plot.jpg" alt="ARIMA" width="900"/>
-  <img src="reports/correlation.jpg" alt="correlation" width="600"/>
+  <img src="reports/correlation.jpg" alt="correlation" width="500"/>
+  <img src="reports/salse_weekdays_vs_weekends.jpg" alt="salse_weekend" width="500"/>
 </p>
 
 
