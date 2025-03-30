@@ -43,18 +43,21 @@ This data source contains the daily sales data of 50 items from 10 stores, cover
 - Pydantic (Input validation)
 
 ## Feature Engineering
+[Go to file](src/features/feature_engineering.py)
 - Created lag features (1, 7, 14 days) to capture historical demand patterns
 - Added rolling averages (7, 14, 30 days) for trend smoothing
 - Applied cyclical transformations to temporal features (sin/cos encoding for month and day of week)
 - Prevented data leakage by using shift(1) before applying any time-dependent features
 
 ## Model Training & Baseline
+[Go to file](src/models/train_model.py)
 - Built a naive baseline model using the previous day’s sales
 - Trained an XGBoost regressor with default parameters
 - Evaluated using RMSE, MAE, and R² metrics
 - Saved best model version for serving
 
 ## Hyperparameter Tuning with Optuna
+[Go to file](src/models/tune_model.py)
 - Used Optuna for efficient, automated hyperparameter search
 - Defined search space for XGBoost (max_depth, learning_rate, subsample, etc.)
 - Selected best model using lowest RMSE
@@ -67,6 +70,7 @@ Included visualizations:
 
 
 ## Model Tracking with MLflow
+[Go to file](src/models/tune_model_mlflow.py)
 - Tracked all training runs, metrics, and parameters
 - Used MLflow both for basic model training and Optuna runs
 - Logged model versions, enabling reproducibility and rollback
@@ -90,18 +94,21 @@ Run monitoring
 
 
 ## Model Serving via FastAPI
+[Go to file](app/main.py)
 - Served the trained XGBoost model via RESTful API using FastAPI
 - Created a `/predict` endpoint with Pydantic-based input validation
 - Supports JSON input → returns prediction
 Run locally: ```uvicorn app.main:app --reload --port 8000```
 
 ## Dockerization
+[Go to file](./Dockerfile)
 - Containerized the FastAPI app using a minimal Docker image
 - Ensures consistent behavior across environments (local, cloud, etc.)
 Command: ```docker build -t sales-api .```
 ```docker run -p 8000:8000 sales-api```
 
 ## Monitoring & Drift Detection
+[Go to file](./monitor.py)
 - Added a lightweight offline monitoring script (`monitor.py`)
 - Loads new data, runs inference, calculates RMSE
 - If RMSE exceeds predefined threshold → logs an alert
